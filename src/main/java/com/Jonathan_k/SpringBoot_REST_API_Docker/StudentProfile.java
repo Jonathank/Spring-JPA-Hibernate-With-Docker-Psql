@@ -6,6 +6,8 @@ package com.Jonathan_k.SpringBoot_REST_API_Docker;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 /**
  * @author JONATHAN
@@ -17,6 +19,10 @@ public class StudentProfile {
     @GeneratedValue
     private Integer id;
     private String bio;
+    
+    @OneToOne()
+    @JoinColumn(name = "student_id")
+    private Student student;
     
     public StudentProfile() {}
     /**

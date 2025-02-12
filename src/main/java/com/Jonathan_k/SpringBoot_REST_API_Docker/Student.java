@@ -3,11 +3,13 @@
  */
 package com.Jonathan_k.SpringBoot_REST_API_Docker;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -28,6 +30,10 @@ public class Student {
     private String email;
     @Column(name ="age")
     private int age;
+    
+    @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
+    private StudentProfile dtudnetProfile;
+    
     
     public Student() {}
     
