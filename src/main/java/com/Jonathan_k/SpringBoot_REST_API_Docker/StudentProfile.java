@@ -57,7 +57,19 @@ public class StudentProfile {
         this.bio = bio;
     }
     
-    
+
+    /**
+     * @return the student
+     */
+    public Student getStudent() {
+        return student;
+    }
+    /**
+     * @param student the student to set
+     */
+    public void setStudent(Student student) {
+        this.student = student;
+    }
     
     
 }

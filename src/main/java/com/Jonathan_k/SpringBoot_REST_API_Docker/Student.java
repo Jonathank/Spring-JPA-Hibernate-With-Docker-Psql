@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -32,8 +34,10 @@ public class Student {
     private int age;
     
     @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
-    private StudentProfile dtudnetProfile;
-    
+    private StudentProfile studnetProfile;
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    private School school;
     
     public Student() {}
     
@@ -108,6 +112,34 @@ public class Student {
      */
     public void setAge(int age) {
         this.age = age;
+    }
+
+    /**
+     * @return the studnetProfile
+     */
+    public StudentProfile getStudnetProfile() {
+        return studnetProfile;
+    }
+
+    /**
+     * @param studnetProfile the studnetProfile to set
+     */
+    public void setStudnetProfile(StudentProfile studnetProfile) {
+        this.studnetProfile = studnetProfile;
+    }
+
+    /**
+     * @return the school
+     */
+    public School getSchool() {
+        return school;
+    }
+
+    /**
+     * @param school the school to set
+     */
+    public void setSchool(School school) {
+        this.school = school;
     }
     
     
