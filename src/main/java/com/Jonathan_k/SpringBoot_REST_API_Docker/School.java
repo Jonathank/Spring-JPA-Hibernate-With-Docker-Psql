@@ -5,6 +5,8 @@ package com.Jonathan_k.SpringBoot_REST_API_Docker;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -20,7 +22,7 @@ public class School {
     @GeneratedValue
     private Integer id;
     private String name;
-    
+    @JsonManagedReference   // tells the json that parent is charge of serializing the child
     @OneToMany(mappedBy = "school")
     private List<Student> students;
     

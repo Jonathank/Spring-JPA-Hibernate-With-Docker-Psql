@@ -3,6 +3,8 @@
  */
 package com.Jonathan_k.SpringBoot_REST_API_Docker;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +37,8 @@ public class Student {
     
     @OneToOne(mappedBy = "student",cascade = CascadeType.ALL)
     private StudentProfile studnetProfile;
+    
+    @JsonBackReference  // child, it tells that student doesnt need to serialize the parent(school)
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
