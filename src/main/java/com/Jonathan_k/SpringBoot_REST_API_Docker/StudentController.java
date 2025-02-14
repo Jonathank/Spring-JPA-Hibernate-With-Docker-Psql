@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/rest/api")
-public class Controller {
+public class StudentController {
 
     private final StudentRepository repo;
     
-    public Controller(StudentRepository repos) {
+    public StudentController(StudentRepository repos) {
 	this.repo = repos;
     }
     
