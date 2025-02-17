@@ -19,51 +19,36 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest/api/schools")
 public class SchoolController {
 
-    private final SchoolRepository repo;
-    
+    private final SchoolService service;
     /**
-     * @param repo
+     * @param service
      */
-    public SchoolController(SchoolRepository repo) {
-	this.repo = repo;
+    public SchoolController(SchoolService service) {
+	this.service= service;
     }
 
     //use Data Transfer Object to limit data expose
     @PostMapping("/dto/addSchool")
     public SchoolDto AddSchool(@RequestBody SchoolDto schooldto) {
-	var school = toStudent(schooldto);
-	 repo.save(school);
-	 return schooldto;
+	return this.service.addSchool(schooldto);
     }
 
-    //DTO
-    private School toStudent(SchoolDto schdto) {
-	
-	return new School(schdto.name());
-    }
-    
+   
     
     //normal way
     @PostMapping("/addSchool")
     public School AddSchool(@RequestBody School school) {
-	return repo.save(school);
+	return this.service.addStudent(school);
     }
     
-    //return list in using DTO
-    private SchoolDto toSchoolDto(School sch) {
-   	return new SchoolDto(sch.getName());
-       }
     
     @GetMapping("/dto/getSchools")
     public List<SchoolDto> getSchoolsDto(){
-	return repo.findAll()
-		.stream()
-		.map(this::toSchoolDto)
-		.collect(Collectors.toList());
+	return this.service.getAllSchoolsDto();
     }
     //normal way
     @GetMapping("/getSchools")
     public List<School> getSchools(){
-	return repo.findAll();
+	return this.service.getAllSchools();
     }
 }

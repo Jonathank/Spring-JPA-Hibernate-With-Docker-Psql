@@ -25,79 +25,51 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest/api")
 public class StudentController {
 
-    private final StudentRepository repo;
     
-    public StudentController(StudentRepository repos) {
-	this.repo = repos;
+    private final StudentService service;
+    
+    
+    /**
+     * @param service
+     */
+    public StudentController(StudentService service) {
+	this.service = service;
     }
-    
+
     //use Data Transfer Object to filter sensitive info to api
     @PostMapping("/dto/addStudent")
-    public StudentResponseDto post( @RequestBody StudentDto stdDto) {
-	var student = toStudent(stdDto);
-	var savedStudent = repo.save(student);
-	return toStudentResponseDto(savedStudent);
-    }
-    //converts DTO object to Student object for persistence management
-    private Student toStudent(StudentDto Dto) {
-	var student = new Student();
-	student.setFirstname(Dto.firstname());
-	student.setLastname(Dto.lastname());
-	student.setEmail(Dto.email());
-	
-	var school = new School();
-	school.setId(Dto.schoolId());
-	//set school for student
-	student.setSchool(school);
-	 return student;
-	
-    }
-    //returns only what the user should see as response after creating Student OB
-    private StudentResponseDto toStudentResponseDto(Student std) {
-	return new StudentResponseDto(
-	std.getFirstname(),
-	std.getLastname(),
-	std.getEmail()
-		);
-    }
-    // normal way
-    @PostMapping("/addStudent")
-    public Student post( @RequestBody Student std) {
-	return repo.save(std);
-	 
+    public StudentResponseDto saveStudent( @RequestBody StudentDto stdDto) {
+	return this.service.saveStudent(stdDto);
     }
     
+  
+    
     @GetMapping("/findById/{id}")
-    public Student findById( @PathVariable Integer id) {
-	return repo.findById(id)
-	.orElse(new Student());
+    public StudentResponseDto findById( @PathVariable Integer id) {
+	return this.service.findById(id);
     }
     
    //get using DTO
     @GetMapping("/dto/findAllStudents")
     public List<StudentResponseDto> findAllStudentsWithDTO() {
 	
-	return repo.findAll()
-		.stream()
-		.map(this::toStudentResponseDto)
-		.collect(Collectors.toList());
+	return this.service.findAllStudentsWithDto();
     }
     //NORMAL WAY
     @GetMapping("/findAllStudents")
     public List<Student> findAllStudents() {
-	return repo.findAll();
-	
+	return this.service.findAllStudents();
     }
     
     @GetMapping("/students/search/{student-name}")
-    public List<Student> findAllStudents(@PathVariable("student-name") String name) {
-	return repo.findAllByFirstnameContaining(name);
+    public List<StudentResponseDto> findStudentsByName(@PathVariable("student-name") String name) {
 	
+	return this.service.findStudentsByName(name);
     }
     
     @DeleteMapping("/students/delete-id/{student-id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteStudent(@PathVariable("student-id") Integer id) {
-	repo.deleteById(id);
+	this.service.deleteStudent(id);
     }
   }
