@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.Jonathan_k.SpringBoot_REST_API_Docker;
+package com.Jonathan_k.SpringBoot_REST_API_Docker.students;
 
 /**
  * @author JONATHAN

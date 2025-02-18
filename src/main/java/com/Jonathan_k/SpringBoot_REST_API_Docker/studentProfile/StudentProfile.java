@@ -1,7 +1,9 @@
 /**
  * 
  */
-package com.Jonathan_k.SpringBoot_REST_API_Docker;
+package com.Jonathan_k.SpringBoot_REST_API_Docker.studentProfile;
+
+import com.Jonathan_k.SpringBoot_REST_API_Docker.students.Student;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

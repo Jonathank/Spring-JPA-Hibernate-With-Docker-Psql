@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.Jonathan_k.SpringBoot_REST_API_Docker;
+package com.Jonathan_k.SpringBoot_REST_API_Docker.studentProfile;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,9 +1,11 @@
 /**
  * 
  */
-package com.Jonathan_k.SpringBoot_REST_API_Docker;
+package com.Jonathan_k.SpringBoot_REST_API_Docker.students;
 
 import org.springframework.stereotype.Service;
+
+import com.Jonathan_k.SpringBoot_REST_API_Docker.school.School;
 
 /**
  * @author JONATHAN
