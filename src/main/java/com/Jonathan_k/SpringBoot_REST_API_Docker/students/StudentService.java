@@ -25,6 +25,7 @@ public class StudentService {
 	this.studentMapper = studentMapper;
     }
     
+    
     public StudentResponseDto saveStudent(StudentDto stdDto) {
 	var student = studentMapper.toStudent(stdDto);
 	var savedStudent = repo.save(student);
@@ -34,6 +35,7 @@ public class StudentService {
     public List<Student>findAllStudents(){
 	return repo.findAll();
     }
+   
     
     public StudentResponseDto findById(Integer id) {
 	return repo.findById(id)
